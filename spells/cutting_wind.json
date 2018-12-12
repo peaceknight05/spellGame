@@ -1,4 +1,9 @@
 {
     "game_name": "Cutting Wind",
-    "tier": 0
+    "attribute": "air",
+    "tier": 0,
+    "type": "offense",
+    "damage": 2,
+    "backfire_chance": 5,
+    "master_percentage": 20
 }

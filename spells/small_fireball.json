@@ -1,4 +1,9 @@
 {
     "game_name": "Small Fireball",
-    "tier": 0
+    "attribute": "fire",
+    "tier": 0,
+    "type": "offense",
+    "damage": 10,
+    "backfire_chance": 20,
+    "master_percentage": 10
 }

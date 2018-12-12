@@ -1,4 +1,9 @@
 {
     "game_name": "Rock Smash",
-    "tier": 0
+    "attribute": "earth",
+    "tier": 0,
+    "type": "offense",
+    "damage": 7,
+    "backfire_chance": 15,
+    "master_percentage": 15
 }

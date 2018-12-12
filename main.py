@@ -13,7 +13,7 @@ microphone = sr.Microphone()
 """
 FORMAT:
 game_name -> string
-atrribute (aka element) -> string (Fire, Water, Air, Earth)
+atrribute (aka element) -> string (fire, water, air, earth)
 tier -> int (0-4)
 type -> string (offense, defense, support)
 damage -> int (ignored if not offense type)
