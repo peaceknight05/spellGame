@@ -4,6 +4,7 @@ import time
 import json
 import os
 import speech_recognition as sr
+from player import Player
 
 #SHORTHANDS
 recognizer = sr.Recognizer()
@@ -25,13 +26,13 @@ effect -> string (ignored if not good or bad effect support class)
 effect_value -> int (ignored if not good or bad effect support class)
 backfire_chance -> int (chance to backfire if not yet mastered)
 master_percentage -> int (chance to be mastered upon use)
+mana_consumption -> int (amount of mana consumed)
 """
 
 #GLOBAL VARIABLES
 VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash"]
 SPELL_DATA = {}
-unlockedSpells = []
-masteredSpells = []
+THE_PLAYER = Player()
 
 #FUNCTION FOR GETTING A SPOKEN SPELL
 def getSpokenSpell():
@@ -51,13 +52,10 @@ def getSpokenSpell():
     for word in rawSpeech:
         rawSpeech[rawSpeech.index(word)] = word.lower()
         
-    if (len(rawSpeech) != 2):
+    if not ("_".join(rawSpeech) in VALID_SPELLS):
         print(" ".join(rawSpeech) + " is not a valid spell. Please try again.")
         getSpokenSpell()
-    elif not ("_".join(rawSpeech) in VALID_SPELLS):
-        print(" ".join(rawSpeech) + " is not a valid spell. Please try again.")
-        getSpokenSpell()
-    elif ("_".join(rawSpeech) in unlockedSpells):
+    elif (THE_PLAYER.inUnlockedSpell("_".join(rawSpeech))):
         return "_".join(rawSpeech)
     else:
         print("You have not unlocked " + SPELL_DATA["_".join(rawSpeech)]["game_name"] + " (Tier " + str(SPELL_DATA["_".join(rawSpeech)]["tier"]) + ")" + " yet. Please try again.")
@@ -69,16 +67,6 @@ for spell in VALID_SPELLS:
         data = json.load(spellFile)
         SPELL_DATA[spell] = data
 
-#UNLOCK ONE RANDOM TIER ONE SPELL
-ran = random.randint(0, len(VALID_SPELLS) - 1)
-temp = VALID_SPELLS[ran]
-while SPELL_DATA[temp]["tier"] != 0:
-    ran = random.randint(0, len(VALID_SPELLS) - 1)
-    temp = VALID_SPELLS[ran]
-unlockedSpells.append(temp)
-
-print("You have unlocked the spell:")
-print(SPELL_DATA[unlockedSpells[0]]["game_name"] + "\n-----------------------------------")
 spokenSpell = getSpokenSpell()
 spellName = SPELL_DATA[spokenSpell]["game_name"]
 spellTier = SPELL_DATA[spokenSpell]["tier"]
