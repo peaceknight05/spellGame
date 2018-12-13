@@ -5,7 +5,7 @@ class Player:
     VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash"]
     SPELL_DATA = {}
 
-    encounteredSpells = []
+    usedSpells = []
     masteredSpells = []
     health = 100
     attribute = ""
@@ -34,14 +34,14 @@ class Player:
             with open("spells/" + spell + ".json", "r") as spellFile:
                 data = json.load(spellFile)
                 self.SPELL_DATA[spell] = data
-                if ((self.SPELL_DATA[spell]["tier"] == 0) & (self.SPELL_DATA[spell]["attribute"] == self.attribute)):
+                if ((self.SPELL_DATA[spell]["tier"] == 0) & (self.SPELL_DATA[spell]["attribute"] == self.attribute) & (self.SPELL_DATA[spell]["type"] == "offense")):
                     possibleFirstSpells.append(spell)
 
         rand = random.randint(0, len(possibleFirstSpells) - 1)
-        self.encounteredSpells.append(possibleFirstSpells[rand])
+        self.usedSpells.append(possibleFirstSpells[rand])
 
         print("Your attribute is: " + self.attribute)
-        print("You have encountered: " + self.SPELL_DATA[self.encounteredSpells[0]]["game_name"] + " (Tier: 0)")
+        print("You have encountered: " + self.SPELL_DATA[self.usedSpells[0]]["game_name"] + " (Tier: 0)")
 
     def getHealth(self):
         return self.health
@@ -55,8 +55,8 @@ class Player:
     def getMana(self):
         return self.mana
 
-    def getEncounteredSpells(self):
-        return self.encounteredSpells
+    def getusedSpells(self):
+        return self.usedSpells
 
     def isCastableSpell(self, spellName):
         return ((self.tier >= self.SPELL_DATA[spellName]["tier"]) & (self.attribute == self.SPELL_DATA[spellName]["attribute"]))
@@ -64,10 +64,10 @@ class Player:
     def isMasteredSpell(self, spellName):
         return spellName in self.masteredSpells
 
-    def addEncounteredSpell(self, spellName):
-        if (spellName in self.encounteredSpells):
+    def addusedSpell(self, spellName):
+        if (spellName in self.usedSpells):
             return
-        self.encounteredSpells.append(spellName)
+        self.usedSpells.append(spellName)
 
     def addMasteredSpell(self, spellName):
         if (spellName in self.masteredSpells):
@@ -95,6 +95,9 @@ class Player:
     #def processEffects():
 
     def processSpell(self, spellName):
+        if not (spellName in self.usedSpells):
+            self.usedSpells.append(spellName)
+
         self.mana -= self.SPELL_DATA[spellName]["mana_consumption"]
         if (self.SPELL_DATA[spellName]["type"] == "offense"):
             if not (self.isMasteredSpell(spellName)):

@@ -1,0 +1,11 @@
+{
+    "game_name": "Nourishing Mud",
+    "attribute": "earth",
+    "tier": 0,
+    "type": "support",
+    "support_class": 1,
+    "heal_value": 5,
+    "backfire_chance": 5,
+    "master_percentage": 15,
+    "mana_consumption": 6
+}

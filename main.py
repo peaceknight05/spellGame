@@ -28,6 +28,20 @@ master_percentage -> int (chance to be mastered upon use)
 mana_consumption -> int (amount of mana consumed)
 """
 
+#list of effect
+"""
+GOOD:
+elemental_equality -> lessens attribute effects
+immunity -> immune to poison
+strength -> multiplies damage done
+abestos -> immune to burn
+BAD:
+burn -> does fire damage over time
+poison -> does damage over time
+weakness -> reduces damage done
+elemental_dominance -> maximises attribute effects
+"""
+
 #GLOBAL VARIABLES
 VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash"]
 SPELL_DATA = {}
@@ -53,8 +67,9 @@ def getSpokenSpell():
 
     #pronunced grim-muah
     if (" ".join(rawSpeech) == "open grimoire"):
-        for spell in THE_PLAYER.getEncounteredSpells():
+        for spell in THE_PLAYER.getusedSpells():
             print(SPELL_DATA[spell]["game_name"] + " (Tier: " + str(SPELL_DATA[spell]["tier"]) + ")")
+        time.sleep(5)
         getSpokenSpell()
 
     spellName = "_".join(rawSpeech)
@@ -97,6 +112,6 @@ print("Feel free to copy your opponent's spells if you are of a higher or equal 
 time.sleep(1)
 print("Beware of backfires though, at best you will waste your mana, at worse you will be severely inflicted by your own spell!")
 time.sleep(1)
-print("Don't forget, you can always use \"Open Grimoire\" (grim-muah) to get a list of encountered spells")
+print("Don't forget, you can always use \"Open Grimoire\" (grim-muah) to get a list of spells you've used before")
 time.sleep(10)
 print("Good luck!")

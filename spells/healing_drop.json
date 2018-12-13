@@ -1,0 +1,11 @@
+{
+    "game_name": "Healing Drop",
+    "attribute": "water",
+    "tier": 0,
+    "type": "support",
+    "support_class": 1,
+    "heal_value": 8,
+    "backfire_chance": 5,
+    "master_percentage": 10,
+    "mana_consumption": 7
+}
