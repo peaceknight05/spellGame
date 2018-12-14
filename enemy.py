@@ -19,7 +19,7 @@ class Enemy:
             self.attribute = "fire"
         elif (ran == 1):
             self.attribute = "water"
-        elif (ran = 2):
+        elif (ran == 2):
             self.attribute = "earth"
         else:
             self.attribute = "air"

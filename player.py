@@ -114,7 +114,7 @@ class Player:
         self.effect = []
 
     def turnEnd(self):
-        if (self.mana != self.maxMana)
+        if (self.mana != self.maxMana):
             self.mana += 1
         self.processEffects()
 
@@ -309,12 +309,12 @@ class Player:
                     if (self.SPELL_DATA[spellName]["support_class"] == 1):
                         if (self.health == self.maxHealth):
                             print("Already at max health!")
-                            else:
-                                temp = self.health
-                                self.health += self.SPELL_DATA[spellName]["heal_value"]
-                                if (self.health > self.maxHealth):
-                                    self.health = self.maxHealth
-                                print("Health rose from " + str(temp) + " to " + str(self.health))
+                        else:
+                            temp = self.health
+                            self.health += self.SPELL_DATA[spellName]["heal_value"]
+                            if (self.health > self.maxHealth):
+                                self.health = self.maxHealth
+                            print("Health rose from " + str(temp) + " to " + str(self.health))
                     elif (self.SPELL_DATA[spellName]["support_class"] == 2):
                         self.addEffect(self.SPELL_DATA[spellName]["effect"])
                 else:
@@ -342,13 +342,13 @@ class Player:
             else:
                 if (self.SPELL_DATA[spellName]["support_class"] == 1):
                     if (self.health == self.maxHealth):
-                                print("Already at max health!")
-                            else:
-                                temp = self.health
-                                self.health += self.SPELL_DATA[spellName]["heal_value"]
-                                if (self.health > self.maxHealth):
-                                    self.health = self.maxHealth
-                                print("Health rose from " + str(temp) + " to " + str(self.health))
+                        print("Already at max health!")
+                    else:
+                        temp = self.health
+                        self.health += self.SPELL_DATA[spellName]["heal_value"]
+                        if (self.health > self.maxHealth):
+                            self.health = self.maxHealth
+                        print("Health rose from " + str(temp) + " to " + str(self.health))
                 elif (self.SPELL_DATA[spellName]["support_class"] == 2):
                     self.addEffect(self.SPELL_DATA[spellName]["effect"])
         

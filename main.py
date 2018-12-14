@@ -4,6 +4,7 @@ import time
 import json
 import speech_recognition as sr
 from player import Player
+from enemy import Enemy
 
 #SHORTHANDS
 recognizer = sr.Recognizer()
@@ -109,6 +110,7 @@ time.sleep(1)
 print("Do wait for the word \"Ready\" to pop up first.")
 castedSpell = getSpokenSpell()
 castSpell(castedSpell, THE_PLAYER, None)
+THE_PLAYER.statsReset()
 time.sleep(1)
 print("Well then, I think I'm done here so I'll be off.")
 time.sleep(1)
