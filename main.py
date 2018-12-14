@@ -89,6 +89,12 @@ def castSpell(spellName, caster, target = THE_PLAYER):
         THE_PLAYER.processSpell(spellName)
         if (target == None):
             return
+        else:
+            target.processAttack(spellName, caster)
+    else:
+        print("Opponent cast: " + SPELL_DATA[spellName]["game_name"] + " (Tier: " + str(SPELL_DATA[spellName]["tier"]) + ")")
+        caster.processSpell(spellName)
+        target.processAttack(spellName, caster)
 
 #LOADING SPELLS
 for spell in VALID_SPELLS:

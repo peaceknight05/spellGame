@@ -133,7 +133,7 @@ class Player:
         self.tierUpgradeProgress = 0
 
     #method to deduct health, defense points etc
-    def processAttack(spellName, caster):
+    def processAttack(self, spellName, caster):
         tempP = self.defensePoints
         tempPe = self.defensePercentage
 
@@ -216,7 +216,7 @@ class Player:
             print("Player's health dropped from " + str(temp) + " to " + str(self.health))
     
     #method to process bad effects
-    def processEffects():
+    def processEffects(self):
         for effect in self.effects:
             if (effect[1] == 0):
                 self.effects.remove(effect)
