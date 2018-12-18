@@ -2,7 +2,7 @@ import random
 import json
 
 class Player:
-    VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash", "healing_drop", "minor_pheonix_heal", "nourishing_mud", "refreshing_air"]
+    VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash", "healing_drop", "minor_phoenix_heal", "nourishing_mud", "refreshing_air"]
     SPELL_DATA = {}
 
     usedSpells = []
@@ -54,7 +54,7 @@ class Player:
         return self.attribute
 
     def isCastableSpell(self, spellName):
-        return ((self.tier >= self.SPELL_DATA[spellName]["tier"]) & (self.attribute == self.SPELL_DATA[spellName]["attribute"]))
+        return ((self.tier >= self.SPELL_DATA[spellName]["tier"]) & (self.attribute == self.SPELL_DATA[spellName]["attribute"]) & (self.mana >= self.SPELL_DATA[spellName]["mana_consumption"]))
     
     def isMasteredSpell(self, spellName):
         return spellName in self.masteredSpells
@@ -100,7 +100,7 @@ class Player:
 
     def turnEnd(self):
         if (self.mana != self.maxMana):
-            self.mana += random.randint(1,3)
+            self.mana += random.randint(1,2 + self.tier)
             if (self.mana > self.maxMana):
                 self.mana = self.maxMana
         self.processEffects()
@@ -118,8 +118,6 @@ class Player:
         self.health = ((self.health / tempH) * 100) * self.maxHealth
         self.mana = ((self.mana / tempM) * 100) * self.maxMana
         self.tierUpgradeProgress = 0
-
-    #enemy has code up to here
 
     #method to deduct health, defense points etc
     def processAttack(self, spellName, caster):
@@ -255,6 +253,20 @@ class Player:
                 if (rand > self.SPELL_DATA[spellName]["master_percentage"]):
                     self.addMasteredSpell(spellName)
                     print("You have mastered " + self.SPELL_DATA[spellName]["game_name"] + " (Tier: " + str(self.SPELL_DATA[spellName]["tier"]) + ")")
+                    if (self.SPELL_DATA[spellName]["defense_class"] == 1):
+                        temp = self.defensePoints
+                        self.defensePoints += self.SPELL_DATA[spellName]["defense_value"]
+                        print("Player's defense points increased from " + str(temp) + " to " + str(self.defensePoints))
+                    else:
+                        temp = self.defensePercentage
+                        self.defensePercentage += self.SPELL_DATA[spellName]["defense_value"]
+                        if (self.defensePercentage > 100):
+                            self.defensePercentage = 100
+                            print("Player's defense percentage is at 100%! The next attack will be nullified!")
+                        elif (temp == self.defensePercentage):
+                            print("Player's defense percentage is already at 100%! The next attack will be nullified!")
+                        else:
+                            print("Player's defense percentage has risen from " + str(temp) + " to " + str(self.defensePercentage))
                 else:
                     rand = random.randint(0,99)
                     if (rand > self.SPELL_DATA[spellName]["backfire_chance"]):

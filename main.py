@@ -44,7 +44,7 @@ elemental_dominance -> maximises attribute effects
 """
 
 #GLOBAL VARIABLES
-VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash", "healing_drop", "minor_pheonix_heal", "nourishing_mud", "refreshing_air"]
+VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash", "healing_drop", "minor_phoenix_heal", "nourishing_mud", "refreshing_air"]
 SPELL_DATA = {}
 THE_PLAYER = Player()
 
