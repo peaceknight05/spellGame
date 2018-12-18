@@ -2,7 +2,7 @@ import random
 import json
 
 class Player:
-    VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash"]
+    VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash", "healing_drop", "minor_pheonix_heal", "nourishing_mud", "refreshing_air"]
     SPELL_DATA = {}
 
     usedSpells = []
@@ -47,20 +47,11 @@ class Player:
         print("Your attribute is: " + self.attribute)
         print("You have encountered: " + self.SPELL_DATA[self.usedSpells[0]]["game_name"] + " (Tier: 0)")
 
-    def getHealth(self):
-        return self.health
+    def getusedSpells(self):
+        return self.usedSpells
 
     def getAttribute(self):
         return self.attribute
-
-    def getTier(self):
-        return self.tier
-
-    def getMana(self):
-        return self.mana
-
-    def getusedSpells(self):
-        return self.usedSpells
 
     def isCastableSpell(self, spellName):
         return ((self.tier >= self.SPELL_DATA[spellName]["tier"]) & (self.attribute == self.SPELL_DATA[spellName]["attribute"]))
@@ -98,12 +89,6 @@ class Player:
             self.effects.add([effectName, 3])
             print("Player has just been given the \"" + effectName + "\" effect")
 
-    def setHealth(self, health):
-        self.health = health
-
-    def setMana(self, mana):
-        self.mana = mana
-
     def statsReset(self):
         self.mana = 10
         self.health = 100
@@ -115,7 +100,9 @@ class Player:
 
     def turnEnd(self):
         if (self.mana != self.maxMana):
-            self.mana += 1
+            self.mana += random.randint(1,3)
+            if (self.mana > self.maxMana):
+                self.mana = self.maxMana
         self.processEffects()
 
         if ((self.tier != 4) & (self.tierUpgradeProgress == self.tierUpgradeRequirements[tier])):
@@ -131,6 +118,8 @@ class Player:
         self.health = ((self.health / tempH) * 100) * self.maxHealth
         self.mana = ((self.mana / tempM) * 100) * self.maxMana
         self.tierUpgradeProgress = 0
+
+    #enemy has code up to here
 
     #method to deduct health, defense points etc
     def processAttack(self, spellName, caster):
@@ -237,7 +226,7 @@ class Player:
 
     def processSpell(self, spellName):
         if not (spellName in self.usedSpells):
-            self.usedSpells.append(spellName)
+            self.addusedSpell(spellName)
 
         self.mana -= self.SPELL_DATA[spellName]["mana_consumption"]
 

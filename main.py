@@ -44,7 +44,7 @@ elemental_dominance -> maximises attribute effects
 """
 
 #GLOBAL VARIABLES
-VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash"]
+VALID_SPELLS = ["small_fireball", "water_bullet", "cutting_wind", "rock_smash", "healing_drop", "minor_pheonix_heal", "nourishing_mud", "refreshing_air"]
 SPELL_DATA = {}
 THE_PLAYER = Player()
 
@@ -95,7 +95,7 @@ def castSpell(spellName, caster, target = THE_PLAYER):
     else:
         print("Opponent cast: " + SPELL_DATA[spellName]["game_name"] + " (Tier: " + str(SPELL_DATA[spellName]["tier"]) + ")")
         caster.processSpell(spellName)
-        target.processAttack(spellName, caster)
+        THE_PLAYER.processAttack(spellName, caster)
 
 #LOADING SPELLS
 for spell in VALID_SPELLS:
