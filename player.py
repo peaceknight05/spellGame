@@ -50,6 +50,9 @@ class Player:
     def getusedSpells(self):
         return self.usedSpells
 
+    def getHealth(self):
+        return self.health
+
     def getAttribute(self):
         return self.attribute
 

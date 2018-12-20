@@ -50,6 +50,9 @@ class Enemy:
     def getAttribute(self):
         return self.attribute
 
+    def getHealth(self):
+        return self.health
+
     def hasEffect(self, effectName):
         for effect in self.effects:
             if (effect[0] == effectName):

@@ -103,6 +103,7 @@ for spell in VALID_SPELLS:
         data = json.load(spellFile)
         SPELL_DATA[spell] = data
 
+#TUTORIAL
 print("Greetings, young mage.")
 time.sleep(1)
 print("Try casting a spell.")
@@ -123,3 +124,12 @@ time.sleep(1)
 print("Don't forget, you can always use \"Open Grimoire\" (grim-muah) to get a list of spells you've used before")
 time.sleep(10)
 print("Good luck!")
+
+#GAME
+enemyCount = 0
+points = 0
+while (THE_PLAYER.getHealth() > 0):
+    THE_ENEMY = Enemy()
+    enemyCount += 1
+    while ((THE_PLAYER.getHealth() > 0) & (THE_ENEMY.getHealth() > 0)):
+        
