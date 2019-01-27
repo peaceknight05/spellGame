@@ -41,7 +41,7 @@ class Enemy:
                 if ((data["tier"] <= self.tier) & (data["attribute"] == self.attribute)):
                     self.ARSENAL.append(spell)
 
-        self.tier = random.randint(0,4)
+        self.tier = random.randint(0,3)
         self.health = ENEMY_HEALTH[self.tier]
         self.mana = ENEMY_MANA[self.tier]
         self.maxHealth = ENEMY_HEALTH[self.tier]
@@ -182,8 +182,8 @@ class Enemy:
             effect[1] -= 1
 
     def chooseSpell(self):
-        spellName = ""
-        return spellName
+        #basic spell choosing
+        return random.choice(self.ARSENAL)
 
     def processSpell(self, spellName):
         self.mana -= self.SPELL_DATA[spellName]["mana_consumption"]
@@ -199,12 +199,12 @@ class Enemy:
             if (rand > self.SPELL_DATA[spellName]["backfire_chance"]):
                 temp = self.health
                 self.health -= self.SPELL_DATA[spellName]["damage"] * multiplier
-                print(self.SPELL_DATA[spellname] + " backfired!")
+                print(self.SPELL_DATA[spellName] + " backfired!")
                 print("Health dropped from " + str(temp) + " to " + str(self.health))
         elif (self.SPELL_DATA[spellName]["type"] == "defense"):
             rand = random.randint(0,99)
             if (rand > self.SPELL_DATA[spellName]["backfire_chance"]):
-                print(self.SPELL_DATA[spellname] + " backfired!")
+                print(self.SPELL_DATA[spellName] + " backfired!")
             else:
                 if (self.SPELL_DATA[spellName]["defense_class"] == 1):
                     temp = self.defensePoints
@@ -223,7 +223,7 @@ class Enemy:
         else:
             rand = random.randint(0,99)
             if (rand > self.SPELL_DATA[spellName]["backfire_chance"]):
-                print(self.SPELL_DATA[spellname] + " backfired!")
+                print(self.SPELL_DATA[spellName] + " backfired!")
                 if (self.SPELL_DATA[spellName]["support_class"] == 1):
                     temp = self.health
                     self.health -= self.SPELL_DATA[spellName]["heal_value"]

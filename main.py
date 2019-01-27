@@ -61,7 +61,7 @@ def getSpokenSpell():
         rawSpeech = recognizer.recognize_google(audio).split(" ")        
     except:
         print("Sorry, I couldn't get what you said. Please try again.")
-        getSpokenSpell()
+        return getSpokenSpell()
 
     for word in rawSpeech:
         rawSpeech[rawSpeech.index(word)] = word.lower()
@@ -71,18 +71,18 @@ def getSpokenSpell():
         for spell in THE_PLAYER.getusedSpells():
             print(SPELL_DATA[spell]["game_name"] + " (Tier: " + str(SPELL_DATA[spell]["tier"]) + ")")
         time.sleep(5)
-        getSpokenSpell()
+        return getSpokenSpell()
 
     spellName = "_".join(rawSpeech)
         
     if not (spellName in VALID_SPELLS):
         print(spellName + " is not a valid spell. Please try again.")
-        getSpokenSpell()
+        return getSpokenSpell()
     elif (THE_PLAYER.isCastableSpell(spellName)):
         return spellName
     else:
         print("You have not unlocked " + SPELL_DATA[spellName]["game_name"] + " (Tier: " + str(SPELL_DATA[spellName]["tier"]) + ")" + " yet. Please try again.")
-        getSpokenSpell()
+        return getSpokenSpell()
 
 def castSpell(spellName, caster, target = THE_PLAYER):
     if (caster == THE_PLAYER):
@@ -132,4 +132,7 @@ while (THE_PLAYER.getHealth() > 0):
     THE_ENEMY = Enemy()
     enemyCount += 1
     while ((THE_PLAYER.getHealth() > 0) & (THE_ENEMY.getHealth() > 0)):
-        
+        castedSpell = getSpokenSpell()
+        castSpell(castedSpell, THE_PLAYER, THE_ENEMY)
+        castedSpell = THE_ENEMY.chooseSpell()
+        castSpell(castedSpell, THE_ENEMY, THE_PLAYER)
