@@ -96,6 +96,7 @@ class Player:
         self.mana = 10
         self.health = 100
         self.effect = []
+        self.masteredSpells = []
 
     def fightEnd(self):
         self.mana = self.maxMana
