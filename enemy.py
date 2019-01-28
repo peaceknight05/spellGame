@@ -199,12 +199,12 @@ class Enemy:
             if (rand > self.SPELL_DATA[spellName]["backfire_chance"]):
                 temp = self.health
                 self.health -= self.SPELL_DATA[spellName]["damage"] * multiplier
-                print(self.SPELL_DATA[spellName] + " backfired!")
+                print(self.SPELL_DATA[spellName]["game_name"] + " backfired!")
                 print("Health dropped from " + str(temp) + " to " + str(self.health))
         elif (self.SPELL_DATA[spellName]["type"] == "defense"):
             rand = random.randint(0,99)
             if (rand > self.SPELL_DATA[spellName]["backfire_chance"]):
-                print(self.SPELL_DATA[spellName] + " backfired!")
+                print(self.SPELL_DATA[spellName]["game_name"] + " backfired!")
             else:
                 if (self.SPELL_DATA[spellName]["defense_class"] == 1):
                     temp = self.defensePoints
@@ -223,7 +223,7 @@ class Enemy:
         else:
             rand = random.randint(0,99)
             if (rand > self.SPELL_DATA[spellName]["backfire_chance"]):
-                print(self.SPELL_DATA[spellName] + " backfired!")
+                print(self.SPELL_DATA[spellName]["game_name"] + " backfired!")
                 if (self.SPELL_DATA[spellName]["support_class"] == 1):
                     temp = self.health
                     self.health -= self.SPELL_DATA[spellName]["heal_value"]
