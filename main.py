@@ -106,7 +106,7 @@ for spell in VALID_SPELLS:
 #TUTORIAL
 print("Greetings, young mage.")
 time.sleep(1)
-ans = input("skip tutorial? (y/n)")
+ans = raw_input("skip tutorial? (y/n)")
 if (ans != "y"):
     print("Try casting a spell.")
     castedSpell = getSpokenSpell()
